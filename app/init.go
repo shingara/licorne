@@ -1,6 +1,20 @@
+// @APIVersion 1.0.0
+// @APITitle My Cool API
+// @APIDescription My API usually works as expected. But sometimes it's not true
+// @Contact api@contact.me
+// @TermsOfServiceUrl http://google.com/
+// @License BSD
+// @LicenseUrl http://opensource.org/licenses/BSD-2-Clause
+
 package app
 
-import "github.com/robfig/revel"
+import (
+	"os"
+	"github.com/robfig/revel"
+	"licorne/utilities/helper"
+	"licorne/utilities/mongo"
+	"licorne/utilities/tracelog"
+)
 
 func init() {
 	// Filters is the default set of global filters.
@@ -21,7 +35,7 @@ func init() {
 
 	// register startup functions with OnAppStart
 	// ( order dependent )
-	// revel.OnAppStart(InitDB())
+	revel.OnAppStart(initApp)
 	// revel.OnAppStart(FillCache())
 }
 
@@ -35,4 +49,25 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 	c.Response.Out.Header().Add("X-Content-Type-Options", "nosniff")
 
 	fc[0](c, fc[1:]) // Execute the next filter stage.
+}
+
+// initApp contains all application level initialization
+func initApp() {
+	// Capture the global email settings
+	// tracelog.EmailHost = revel.Config.StringDefault("email.host", "")
+	// tracelog.EmailPort = revel.Config.IntDefault("email.port", 0)
+	// tracelog.EmailUserName = revel.Config.StringDefault("email.username", "")
+	// tracelog.EmailPassword = revel.Config.StringDefault("email.password", "")
+	// tracelog.EmailTo = revel.Config.StringDefault("email.to", "")
+	// tracelog.EmailAlertSubject = revel.Config.StringDefault("email.alert_subject", "")
+
+	// MongoDB Settings
+	helper.MONGO_DATABASE = revel.Config.StringDefault("mgo.use_database", "")
+
+	// Init mongo
+	err := mongo.Startup(helper.MAIN_GO_ROUTINE)
+	if err != nil {
+		tracelog.COMPLETED_ERROR(err, helper.MAIN_GO_ROUTINE, "initApp")
+		os.Exit(1)
+	}
 }
