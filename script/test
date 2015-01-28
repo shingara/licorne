@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#Run all tests
+ginkgo -r -failOnPending -randomizeAllSpecs -skipMeasurements=true "$@"

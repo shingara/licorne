@@ -7,21 +7,17 @@ import (
 	"licorne/controllers"
 )
 
-func main() {
-	// mux := http.NewServeMux()
 
-
+func BuildRouter() *mux.Router {
 	router := mux.NewRouter()
 	router.HandleFunc("/", controllers.HomeHandler)
+	router.HandleFunc("/games", controllers.GamesIndexHandler)
+	return router
+}
 
-	// mux.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-	// 	db := GetDb(req)
-	// 	site := getSite(db)
-	// 	r.HTML(w, http.StatusOK, "home", site)
-	// })
-
+func main() {
 	n := negroni.Classic()
 	n.Use(middleware.MongoMiddleware())
-	n.UseHandler(router)
+	n.UseHandler(BuildRouter())
 	n.Run(":9000")
 }

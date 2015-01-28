@@ -1,7 +1,7 @@
 db:
   image: mongo:2.6
   volumes:
-    - ./data/mongo:/data/db
+    - ~/data/licorne/mongo:/data/db
   ports:
     - "27017"
 

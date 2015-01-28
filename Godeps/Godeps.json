@@ -1,0 +1,34 @@
+{
+	"ImportPath": "licorne",
+	"GoVersion": "go1.4.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/negroni",
+			"Comment": "v0.1-55-g1dd3ab0",
+			"Rev": "1dd3ab0ff59e13f5b73dcbf70703710aebe50d2f"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
+		},
+		{
+			"ImportPath": "github.com/onsi/ginkgo",
+			"Comment": "v1.1.0-33-g17ea479",
+			"Rev": "17ea479729ee427265ac1e913443018350946ddf"
+		},
+		{
+			"ImportPath": "github.com/onsi/gomega",
+			"Comment": "v1.0-28-g8adf9e1",
+			"Rev": "8adf9e1730c55cdc590de7d49766cb2acc88d8f2"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2015.01.24",
+			"Rev": "c6a7dce14133ccac2dcac3793f1d6e2ef048503a"
+		}
+	]
+}
