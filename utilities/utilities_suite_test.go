@@ -1,4 +1,4 @@
-package main_test
+package utilities_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -9,5 +9,6 @@ import (
 
 func TestLicorne(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Licorne Suite")
+	RunSpecs(t, "Utilities Suite")
 }
+

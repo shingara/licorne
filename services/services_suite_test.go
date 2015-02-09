@@ -1,31 +1,34 @@
-package controllers_test
+package services_test
 
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"licorne/services"
 	"licorne/models"
 	"licorne/tests"
 	"licorne/utilities"
+	"licorne/services"
+
 	"testing"
 )
 
-func TestControllers(t *testing.T) {
+func TestServices(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Controllers Suite")
+	RunSpecs(t, "Services Suite")
 }
 
-var GameFactory models.Game
+var (
+	Game_attr map[string]interface{}
+	GameFactory models.Game
+)
 
 var _ = BeforeSuite(func() {
 	tests.SetTestDatabase()
 
-	_, GameFactory  = tests.CreateFactoryGame()
+	Game_attr, GameFactory  = tests.CreateFactoryGame()
 	services.CreateGame(&GameFactory)
 })
 
 var _ = AfterSuite(func() {
 	utilities.DropDatabase()
 })
-

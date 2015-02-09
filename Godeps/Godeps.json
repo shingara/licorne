@@ -8,10 +8,6 @@
 			"Rev": "1dd3ab0ff59e13f5b73dcbf70703710aebe50d2f"
 		},
 		{
-			"ImportPath": "github.com/gorilla/context",
-			"Rev": "215affda49addc4c8ef7e2534915df2c8c35c6cd"
-		},
-		{
 			"ImportPath": "github.com/gorilla/mux",
 			"Rev": "e444e69cbd2e2e3e0749a2f3c717cec491552bbf"
 		},
@@ -19,6 +15,10 @@
 			"ImportPath": "github.com/onsi/ginkgo",
 			"Comment": "v1.1.0-33-g17ea479",
 			"Rev": "17ea479729ee427265ac1e913443018350946ddf"
+		},
+		{
+			"ImportPath": "github.com/codegangsta/gin",
+			"Rev": "20c9707f2046c2a1019cea9659931731cf15a7dd"
 		},
 		{
 			"ImportPath": "github.com/onsi/gomega",
@@ -29,6 +29,10 @@
 			"ImportPath": "gopkg.in/mgo.v2",
 			"Comment": "r2015.01.24",
 			"Rev": "c6a7dce14133ccac2dcac3793f1d6e2ef048503a"
-		}
+		},
+    {
+      "ImportPath": "github.com/unrolled/render",
+      "Rev": "bdfac4a8df10cc9dc03ee14ba2f655137fd70378"
+    }
 	]
 }

@@ -15,5 +15,6 @@ web:
     - $SSH_AUTH_SOCK:/ssh-agent
   environment:
     - SSH_AUTH_SOCK=/ssh-agent
+    - PORT=9000
   ports:
     - "9000:9000"

@@ -3,10 +3,8 @@ package main
 import (
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
-	"licorne/middleware"
 	"licorne/controllers"
 )
-
 
 func BuildRouter() *mux.Router {
 	router := mux.NewRouter()
@@ -15,9 +13,13 @@ func BuildRouter() *mux.Router {
 	return router
 }
 
-func main() {
+func BuildMiddlewares() *negroni.Negroni {
 	n := negroni.Classic()
-	n.Use(middleware.MongoMiddleware())
 	n.UseHandler(BuildRouter())
+	return n
+}
+
+func main() {
+	n := BuildMiddlewares()
 	n.Run(":9000")
 }

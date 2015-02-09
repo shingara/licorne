@@ -1,18 +1,53 @@
 package utilities
 
 import (
-	"github.com/gorilla/context"
 	"gopkg.in/mgo.v2"
-	"net/http"
+	// "log"
+	// "os"
 )
 
-func GetDb(r *http.Request) *mgo.Database {
-	if rv := context.Get(r, "db"); rv != nil {
-		return rv.(*mgo.Database)
+type (
+	Service struct {
+		MongoSession *mgo.Session
+		Database string
 	}
-	return nil
+)
+
+var (
+	mgoSession *mgo.Session
+	config *Config
+)
+
+// Get a MongoDB Session and memoize it if already save
+func getSession() *mgo.Session {
+	// mgo.SetDebug(true)
+	// var aLogger *log.Logger
+	// aLogger = log.New(os.Stderr, "", log.LstdFlags)
+	// mgo.SetLogger(aLogger)
+
+	if config == nil {
+		config = GetConfig()
+	}
+
+	if mgoSession == nil {
+		var err error
+		mgoSession, err = mgo.Dial(config.Host + ":" + config.Port)
+		if err != nil {
+			panic(err) // no, not really
+		}
+	}
+	return mgoSession.Clone()
 }
 
-func SetDb(r *http.Request, val *mgo.Database) {
-	context.Set(r, "db", val)
+func DropDatabase() error{
+	session := getSession()
+	defer session.Close()
+	return session.DB(config.Database).DropDatabase()
+}
+
+func WithCollection(collection string, s func(*mgo.Collection) error) error {
+	session := getSession()
+	defer session.Close()
+	c := session.DB(config.Database).C(collection)
+	return s(c)
 }
