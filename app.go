@@ -9,7 +9,7 @@ import (
 func BuildRouter() *mux.Router {
 	router := mux.NewRouter()
 	router.HandleFunc("/", controllers.HomeHandler)
-	router.HandleFunc("/games", controllers.GamesIndexHandler)
+	router.HandleFunc("/v1/games", controllers.GamesIndexHandler)
 	return router
 }
 
