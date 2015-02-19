@@ -1,25 +1,14 @@
 package main
 
 import (
-	"github.com/codegangsta/negroni"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"licorne/controllers"
 )
 
-func BuildRouter() *mux.Router {
-	router := mux.NewRouter()
-	router.HandleFunc("/", controllers.HomeHandler)
-	router.HandleFunc("/v1/games", controllers.GamesIndexHandler)
-	return router
-}
-
-func BuildMiddlewares() *negroni.Negroni {
-	n := negroni.Classic()
-	n.UseHandler(BuildRouter())
-	return n
-}
 
 func main() {
-	n := BuildMiddlewares()
-	n.Run(":9000")
+	r := gin.Default()
+	r.GET("/v1/games", controllers.GamesIndexHandler)
+	r.POST("/v1/games", controllers.GamesCreateHandler )
+	r.Run(":9000")
 }

@@ -8,14 +8,16 @@ type (
 	// GameModel contains information for a game
 	Game struct {
 		ID   bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		Name string `json:"name"`
-		Players []Player `json:"players"`
+		Name string `json:"name" schema:"name"`
+		Players []Player `json:"players" schema:"players"`
 	}
 
 	GameJson struct {
-		ID   bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		Name string `json:"name"`
+		Game
 		Type string `json:"type", omitempty`
-		Players []Player `json:"players"`
+	}
+
+	GameForm struct {
+		Game
 	}
 )

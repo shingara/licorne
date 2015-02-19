@@ -12,6 +12,9 @@ var collection_name = "games"
 
 
 func CreateGame(game *models.Game) error {
+	// if (!game.ID) {
+	// 	game.ID = bson.NewObjectId()
+	// }
 	err := utilities.WithCollection( collection_name, func(collection *mgo.Collection) error {
 		return collection.Insert(game)
 	})
@@ -39,10 +42,8 @@ func MakeJsonGames(gameList []models.Game) (map[string]interface{}) {
 	list := make([]models.GameJson, len(gameList))
 	for i, game := range gameList {
 		json_game := models.GameJson{
-			ID: game.ID,
-			Name: game.Name,
+			Game: game,
 			Type: "games",
-			Players: game.Players,
 		}
 		list[i] = json_game
 	}

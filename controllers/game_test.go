@@ -13,7 +13,7 @@ var _ = Describe("GameController", func() {
 
 	Context("List all games", func() {
 		It("returns a 200 Status Code", func() {
-			response := tests.Request("GET", "/games")
+			response := tests.Request("GET", "/v1/games")
 			Expect(response.Code).To(Equal(200))
 			content_type := response.HeaderMap.Get("Content-Type")
 			Expect(content_type).To(Equal("application/json; charset=UTF-8"))

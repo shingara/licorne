@@ -10,7 +10,6 @@ WORKDIR /go/src/licorne
 
 ADD Godeps /go/src/licorne/Godeps
 RUN godep restore
-RUN go install -v github.com/onsi/ginkgo/ginkgo ;\
-  go install -v github.com/codegangsta/gin
+RUN go install -v github.com/onsi/ginkgo/ginkgo
 
 ADD . /go/src/licorne
