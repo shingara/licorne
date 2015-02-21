@@ -11,14 +11,14 @@ import (
 var collection_name = "games"
 
 
-func CreateGame(game *models.Game) error {
-	// if (!game.ID) {
-	// 	game.ID = bson.NewObjectId()
-	// }
+func CreateGame(game *models.Game) (*models.Game, error) {
+	if (!game.ID.Valid()) {
+		game.ID = bson.NewObjectId()
+	}
 	err := utilities.WithCollection( collection_name, func(collection *mgo.Collection) error {
 		return collection.Insert(game)
 	})
-	return err
+	return game, err
 }
 
 func AllGame() (gameList []models.Game, err error) {
@@ -35,18 +35,4 @@ func GetGame(id interface{}) (game models.Game, err error) {
 		return collection.FindId(id).One(&game)
 	})
 	return game, err
-}
-
-func MakeJsonGames(gameList []models.Game) (map[string]interface{}) {
-	json := map[string]interface{}{}
-	list := make([]models.GameJson, len(gameList))
-	for i, game := range gameList {
-		json_game := models.GameJson{
-			Game: game,
-			Type: "games",
-		}
-		list[i] = json_game
-	}
-	json["data"] = list
-	return json
 }

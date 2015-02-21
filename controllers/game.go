@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 
 	"licorne/services"
@@ -9,14 +11,21 @@ import (
 
 func GamesIndexHandler(c *gin.Context) {
 	games, _ := services.AllGame()
-	json := services.MakeJsonGames(games)
+	json := models.MakeJsonGames(games)
 	c.JSON(200, json)
 }
 
 func GamesCreateHandler(c *gin.Context) {
-	var game models.GameForm
-	c.Bind(&game)
-	services.CreateGame(&game.Game)
-	c.JSON(201, gin.H{"status": "success"})
+
+	c.Request.ParseForm()
+	fmt.Println(c.Request.Form)
+	var game_form models.GameForm
+	if c.Bind(&game_form) {
+		game_model := models.ConvertToGame(game_form)
+		services.CreateGame(&game_model)
+		c.JSON(201, models.ConvertJsonGame(game_model))
+	} else {
+		c.JSON(400, c.Errors)
+	}
 }
 
