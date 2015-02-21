@@ -8,7 +8,8 @@ import (
 func BuildEngine() (*gin.Engine) {
 	r := gin.Default()
 	r.GET("/v1/games", controllers.GamesIndexHandler)
-	r.POST("/v1/games", controllers.GamesCreateHandler )
+	r.GET("/v1/games/:id", controllers.GameShowHandler)
+	r.POST("/v1/games", controllers.GamesCreateHandler)
 	return r
 }
 

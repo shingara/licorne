@@ -31,8 +31,9 @@ func AllGame() (gameList []models.Game, err error) {
 
 func GetGame(id interface{}) (game models.Game, err error) {
 	game = models.Game{}
+	bson_id := bson.ObjectIdHex(id.(string))
 	err = utilities.WithCollection( collection_name, func(collection *mgo.Collection) error {
-		return collection.FindId(id).One(&game)
+		return collection.FindId(bson_id).One(&game)
 	})
 	return game, err
 }

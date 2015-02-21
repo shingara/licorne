@@ -24,7 +24,7 @@ var _ = Describe("AllGame", func(){
 var _ = Describe("GetGame", func(){
 
 		It("return the game we request", func(){
-			game, err := GetGame(Game_attr["id"])
+			game, err := GetGame(Game_attr["id"].(bson.ObjectId).Hex())
 			Expect(err).To(BeNil())
 			Expect(game.Name).To(Equal("hello"))
 			Expect(game.ID).To(Equal(Game_attr["id"].(bson.ObjectId)))
