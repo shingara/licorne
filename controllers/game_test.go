@@ -16,7 +16,7 @@ var _ = Describe("GameController", func() {
 			response := tests.Request("GET", "/v1/games")
 			Expect(response.Code).To(Equal(200))
 			content_type := response.HeaderMap.Get("Content-Type")
-			Expect(content_type).To(Equal("application/json; charset=UTF-8"))
+			Expect(content_type).To(Equal("application/json; charset=utf-8"))
 
 
 			var json_return map[string]interface{}

@@ -5,10 +5,13 @@ import (
 	"licorne/controllers"
 )
 
-
-func main() {
+func BuildEngine() (*gin.Engine) {
 	r := gin.Default()
 	r.GET("/v1/games", controllers.GamesIndexHandler)
 	r.POST("/v1/games", controllers.GamesCreateHandler )
-	r.Run(":9000")
+	return r
+}
+
+func main() {
+	BuildEngine().Run(":9000")
 }

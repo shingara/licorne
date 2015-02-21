@@ -11,8 +11,7 @@ import(
 func Request(method string, route string) *httptest.ResponseRecorder {
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest(method, route, nil)
-	n := BuildMiddlewares()
-	n.ServeHTTP(w, r)
+	BuildEngine().ServeHTTP(w, r)
 	return w
 
 }
@@ -26,6 +25,6 @@ func SetTestDatabase() {
 func RequestWithBody(method string, route string, body io.Reader) *httptest.ResponseRecorder {
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest(method, route, body)
-	BuildRouter().ServeHTTP(w, r)
+	BuildEngine().ServeHTTP(w, r)
 	return w
 }
