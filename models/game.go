@@ -1,6 +1,8 @@
 package models
 
 import (
+	"errors"
+
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -38,6 +40,14 @@ func ConvertJsonGame(game Game) (GameJson) {
 	}
 }
 
+// Generate the Game json
+func MakeJsonGame(game Game) (map[string]interface{}) {
+	json := map[string]interface{}{}
+	json["data"] = ConvertJsonGame(game)
+	return json
+}
+
+// Generate the Game list json
 func MakeJsonGames(gameList []Game) (map[string]interface{}) {
 	json := map[string]interface{}{}
 	list := make([]GameJson, len(gameList))
@@ -46,4 +56,16 @@ func MakeJsonGames(gameList []Game) (map[string]interface{}) {
 	}
 	json["data"] = list
 	return json
+}
+
+func (g Game) Valid() []error {
+	errs := []error{}
+	if (len(g.Players) < 2) {
+		errs = append(errs, errors.New("need at least 2 players"))
+	}
+
+	if (len(g.Players) > 4) {
+		errs = append(errs, errors.New("need less than 4 players"))
+	}
+	return errs
 }

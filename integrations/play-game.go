@@ -19,6 +19,12 @@ func main(){
 	game = client.GetGame(game.ID)
 	fmt.Println(game)
 
+	turn := client.GetTurn(game.ID)
+	fmt.Println(turn)
+
+	// turn := client.RollTurn(game.ID, turn.Number, turn.PlayerTurn)
+	// fmt.Println
+
 
 
 	content, _ := client.GetContent( client.BaseUrl() + "/v1/games")

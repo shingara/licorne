@@ -10,9 +10,16 @@ type (
 	Data struct {
 		Games []Game `json:"data"`
 	}
+
+	Player struct {
+		Name string `json:"name"`
+		Color string `json:"color"`
+	}
+
   Game struct {
 		ID string
     Name string `json:"name"`
+		Player []Player `json:"players"`
 	}
 )
 

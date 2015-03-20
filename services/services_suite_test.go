@@ -24,11 +24,13 @@ var (
 
 var _ = BeforeSuite(func() {
 	tests.SetTestDatabase()
+})
 
+var _ = BeforeEach(func(){
 	Game_attr, GameFactory  = tests.CreateFactoryGame()
 	services.CreateGame(&GameFactory)
 })
 
-var _ = AfterSuite(func() {
+var _ = AfterEach(func() {
 	utilities.DropDatabase()
 })

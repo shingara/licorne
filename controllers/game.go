@@ -3,8 +3,8 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 
-	"licorne/services"
 	"licorne/models"
+	"licorne/services"
 )
 
 // List all Games
@@ -30,6 +30,6 @@ func GamesCreateHandler(c *gin.Context) {
 func GameShowHandler(c *gin.Context) {
 	id := c.Params.ByName("id")
 	game, _ := services.GetGame(id)
-	json := models.ConvertJsonGame(game)
+	json := models.MakeJsonGame(game)
 	c.JSON(200, json)
 }

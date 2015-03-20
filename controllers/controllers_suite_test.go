@@ -1,11 +1,12 @@
 package controllers_test
 
 import (
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	"licorne/services"
 	"licorne/models"
+	"licorne/services"
 	"licorne/tests"
 	"licorne/utilities"
 	"testing"
@@ -18,14 +19,16 @@ func TestControllers(t *testing.T) {
 
 var GameFactory models.Game
 
-var _ = BeforeSuite(func() {
+var _ = BeforeEach(func() {
 	tests.SetTestDatabase()
 
-	_, GameFactory  = tests.CreateFactoryGame()
-	services.CreateGame(&GameFactory)
+	_, GameFactory := tests.CreateFactoryGame()
+	_, errs := services.CreateGame(&GameFactory)
+	if (len(errs) > 0) {
+		panic(errs)
+	}
 })
 
-var _ = AfterSuite(func() {
+var _ = AfterEach(func() {
 	utilities.DropDatabase()
 })
-
